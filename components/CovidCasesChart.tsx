@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import { Chart } from "@antv/g2";
 
-import { CovidDataList } from "@/utils/covidData";
+import { APITimeSeriesList } from "@/utils/types";
 
-export const CovidCasesChart = ({ data }: { data: CovidDataList }) => {
+export const CovidCasesChart = ({ data }: { data: APITimeSeriesList[] }) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
