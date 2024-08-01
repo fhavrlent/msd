@@ -6,6 +6,7 @@ import { CovidCasesChart } from "@/components/CovidCasesChart";
 import { CovidDeathsChart } from "@/components/CovidDeathsChart";
 import { fetchCovidData } from "@/utils/covidData";
 import { DashboardHeader } from "@/components/DashboardHeader";
+import { trpc } from "@/server/client";
 
 export default async function Home() {
   const casesData = await fetchCovidData("COVID-19_cases_casesByDay");
@@ -16,12 +17,12 @@ export default async function Home() {
       <DashboardHeader />
       <Row gutter={16}>
         <Col xs={24} lg={12}>
-          <ChartCard title="COVID-19 Cases By Day">
+          <ChartCard title="COVID-19 Cases By Day" graphId="covidCases">
             <CovidCasesChart data={casesData} />
           </ChartCard>
         </Col>
         <Col xs={24} lg={12}>
-          <ChartCard title="COVID-19 Deaths By Day">
+          <ChartCard title="COVID-19 Deaths By Day" graphId="covidDeaths">
             <CovidDeathsChart data={deathsData} />
           </ChartCard>
         </Col>
