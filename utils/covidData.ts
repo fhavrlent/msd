@@ -26,7 +26,7 @@ export const fetchCovidData = async (
   metric: string
 ): Promise<CovidDataList> => {
   const response = await fetch(
-    `https://api.ukhsa-dashboard.data.gov.uk/themes/infectious_disease/sub_themes/respiratory/topics/COVID-19/geography_types/Nation/geographies/England/metrics/${metric}`
+    `https://api.ukhsa-dashboard.data.gov.uk/themes/infectious_disease/sub_themes/respiratory/topics/COVID-19/geography_types/Nation/geographies/England/metrics/${metric}?epiweek=29&year=2021`
   );
 
   if (!response.ok) {
