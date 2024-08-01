@@ -2,21 +2,48 @@ import {
   DownloadOutlined,
   FileOutlined,
   FilterOutlined,
+  MoreOutlined,
 } from "@ant-design/icons";
-import Breadcrumb from "antd/es/breadcrumb";
-import Button from "antd/es/button";
+import { Button, Dropdown, MenuProps, Space } from "antd";
 import Col from "antd/es/col";
 import Row from "antd/es/row";
-import Space from "antd/es/space";
 
-export default function Home() {
+import { ChartCard } from "@/components/ChartCard";
+import { CovidCasesChart } from "@/components/CovidCasesChart";
+import { CovidDeathsChart } from "@/components/CovidDeathsChart";
+import { fetchCovidData } from "@/utils/covidData";
+
+type MenuItem = Required<MenuProps>["items"][number];
+
+const items: MenuItem[] = [
+  {
+    key: "1",
+    label: "Export to PDF",
+    icon: <DownloadOutlined />,
+  },
+  {
+    key: "2",
+    label: "Notes (3)",
+    icon: <FileOutlined />,
+  },
+  {
+    key: "3",
+    label: "Filter (9+)",
+    icon: <FilterOutlined />,
+  },
+];
+
+export default async function Home() {
+  const casesData = await fetchCovidData("COVID-19_cases_casesByDay");
+  const deathsData = await fetchCovidData("COVID-19_deaths_ONSByDay");
+
   return (
     <>
       <Row className="mb-4">
         <Col span={12}>
           <h1 className="text-x">Covid Graphs</h1>
         </Col>
-        <Col span={12} className="text-right">
+        <Col span={12} className="text-right hidden lg:block">
           <Space size={"middle"}>
             <Button
               icon={<DownloadOutlined />}
@@ -37,10 +64,23 @@ export default function Home() {
             </Button>
           </Space>
         </Col>
+        <Col span={12} className="text-right block lg:hidden">
+          <Dropdown menu={{ items }} trigger={["click"]}>
+            <Button icon={<MoreOutlined />} />
+          </Dropdown>
+        </Col>
       </Row>
       <Row gutter={16}>
-        <Col span={12}>Card 1</Col>
-        <Col span={12}>Card 2</Col>
+        <Col xs={24} lg={12}>
+          <ChartCard title="COVID-19 Cases By Day">
+            <CovidCasesChart data={casesData} />
+          </ChartCard>
+        </Col>
+        <Col xs={24} lg={12}>
+          <ChartCard title="COVID-19 Deaths By Day">
+            <CovidDeathsChart data={deathsData} />
+          </ChartCard>
+        </Col>
       </Row>
     </>
   );
