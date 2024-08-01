@@ -25,15 +25,21 @@ export type CovidDataList = CovidData[];
 export const fetchCovidData = async (
   metric: string
 ): Promise<CovidDataList> => {
-  const response = await fetch(
-    `https://api.ukhsa-dashboard.data.gov.uk/themes/infectious_disease/sub_themes/respiratory/topics/COVID-19/geography_types/Nation/geographies/England/metrics/${metric}?epiweek=29&year=2021`
+  const url = new URL(
+    `https://api.ukhsa-dashboard.data.gov.uk/themes/infectious_disease/sub_themes/respiratory/topics/COVID-19/geography_types/Nation/geographies/England/metrics/${metric}`
   );
+
+  url.searchParams.set("epiweek", "29");
+  url.searchParams.set("year", "2021");
+
+  const response = await fetch(url.toString());
 
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
 
   const data = await response.json();
+
   return data.results.map((item: CovidData) => ({
     ...item,
     date: dayjs(item.date).format("DD.MM.YYYY"),
