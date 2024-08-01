@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Chart } from "@antv/g2";
 
 import { CovidDataList } from "@/utils/covidData";
 
-export const CovidCasesChart: React.FC<{ data: CovidDataList }> = ({
-  data,
-}) => {
+export const CovidCasesChart = ({ data }: { data: CovidDataList }) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

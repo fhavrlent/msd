@@ -1,12 +1,12 @@
-import { EditOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Divider } from "antd";
+import { EditOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Card } from "antd";
 
 interface ChartCardProps {
   title: string;
   children: React.ReactNode;
 }
 
-export const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => {
+export const ChartCard = ({ title, children }: ChartCardProps) => {
   return (
     <Card
       title={title}
