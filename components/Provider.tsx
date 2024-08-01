@@ -6,12 +6,17 @@ import { httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 
 function getBaseUrl() {
-  if (typeof window !== "undefined") return ""; // browser should use relative path
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // reference for vercel.com
-  if (process.env.RENDER_INTERNAL_HOSTNAME) {
+  if (typeof window !== "undefined")
+    // browser should use relative path
+    return "";
+  if (process.env.VERCEL_URL)
+    // reference for vercel.com
+    return `https://${process.env.VERCEL_URL}`;
+  if (process.env.RENDER_INTERNAL_HOSTNAME)
+    // reference for render.com
     return `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}`;
-  } // reference for render.com
-  return `http://localhost:${process.env.PORT ?? 3000}`; // assume localhost
+  // assume localhost
+  return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
 export default function Provider({ children }: { children: React.ReactNode }) {
