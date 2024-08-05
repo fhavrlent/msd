@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Layout, { Content } from "antd/es/layout/layout";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 import { AppHeader } from "@/components/AppHeader";
+import Provider from "@/components/Provider";
 
 import "./globals.css";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import Provider from "@/components/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

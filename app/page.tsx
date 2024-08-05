@@ -6,7 +6,6 @@ import { CovidCasesChart } from "@/components/CovidCasesChart";
 import { CovidDeathsChart } from "@/components/CovidDeathsChart";
 import { fetchCovidData } from "@/utils/covidData";
 import { DashboardHeader } from "@/components/DashboardHeader";
-import { trpc } from "@/server/client";
 
 export default async function Home() {
   const casesData = await fetchCovidData("COVID-19_cases_casesByDay");

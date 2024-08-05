@@ -1,6 +1,5 @@
 "use client";
 
-import { trpc } from "@/server/client";
 import {
   EditOutlined,
   HeartFilled,
@@ -9,11 +8,13 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Button, Card } from "antd";
 
-interface ChartCardProps {
+import { trpc } from "@/server/client";
+
+type ChartCardProps = {
   title: string;
   children: React.ReactNode;
   graphId: string;
-}
+};
 
 export const ChartCard = ({ title, children, graphId }: ChartCardProps) => {
   const getFavorites = trpc.favorites.getFavorites.useQuery();
